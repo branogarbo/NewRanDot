@@ -9,7 +9,7 @@ function createDot(fieldRadius,dotRadius) {
   document.querySelectorAll('div.dot')[dotIt].style = `
     position:absolute;
     border-radius:50%;
-    background:hsl(${randInt(0,255)},100%,50%);
+    background:hsla(${randInt(0,255)},100%,50%,${Math.random()});
     width:${dotRadius*2}px;
     height:${dotRadius*2}px;
     transform:translate(${coords});
@@ -18,7 +18,7 @@ function createDot(fieldRadius,dotRadius) {
   var x = document.querySelectorAll('div.dot')[dotIt].getBoundingClientRect().left;
   var y = document.querySelectorAll('div.dot')[dotIt].getBoundingClientRect().top;
 
-  coords = `${x+fieldRadius*Math.cos(fixedRan*Math.PI/180)}px, ${y+fieldRadius*Math.sin(fixedRan*Math.PI/180)}px`;
+  coords = `${x+Math.random()*fieldRadius*Math.cos(fixedRan*Math.PI/180)}px, ${y+Math.random()*fieldRadius*Math.sin(fixedRan*Math.PI/180)}px`;
 
   dotIt++;
 }
@@ -27,4 +27,4 @@ function addDots(interval,fieldRadius,dotRadius) {
   setInterval(createDot,interval,fieldRadius,dotRadius);
 }
 
-addDots(1,10,10);
+addDots(1,20,20);
