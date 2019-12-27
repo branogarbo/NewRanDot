@@ -1,13 +1,15 @@
 var randInt = (lower,upper) => {return Math.floor(Math.random()*(upper-lower)+lower)};
-var userInput = window.prompt(`
-  Keyboard features:
-    p : pauses/unpauses dot engine
-    r : restarts engine with the same parameters
-    c : restarts engine, allows users to change parameters
-    q : removes last dot
+var userPrompt = `
+Keyboard features:
+  p : pauses/unpauses dot engine
+  r : restarts engine with the same parameters
+  c : restarts engine, allows users to change parameters
+  q : removes last dot
 
-  addDot(dot quantity, time between dots, dot field radius, dot radius)
-`,'addDot(Infinity,50,100,50)');
+addDot(dot quantity, time between dots, dot field radius, dot radius)
+`;
+
+var userInput = window.prompt(userPrompt,'addDot(Infinity,50,100,50)');
 
 runEngine();
 
@@ -54,7 +56,7 @@ function runEngine() {
 
     // c : restarts engine, allows users to change parameters
     if (event.key == "c") {
-      userInput = window.prompt('addDot(# of dots, time between dots, dot field radius, dot radius)',userInput);
+      userInput = window.prompt(userPrompt,userInput);
       pause = true;
       runEngine();
     }
