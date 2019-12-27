@@ -3,25 +3,30 @@ var userPrompt = `
     p : pauses/unpauses dot engine
     r : restarts engine with the same parameters
     c : restarts engine, allows users to change parameters
-    double click dot to remove it
+    d : hold d and hover over dot to hide it
 
   addDot(dot quantity, time between dots, dot field radius, dot radius)
 `;
 
+// initializing values
 var randInt = (lower,upper) => {return Math.floor(Math.random()*(upper-lower)+lower)};
 var userInput = window.prompt(userPrompt,'addDot(Infinity,50,100,50)');
+var dotDelStatus = false;
 
 runEngine();
 
 function runEngine() {
-  // initializing values
+  // creates dot container
   document.getElementById('dotCont').outerHTML = '<div id="dotCont"></div>';
-
+  
+  // initializing values
   var dotIt = 0;
+  var pause = false;
   var coords = "calc(50vw - 50%), calc(50vh - 50%)";
   
   function createDot(fieldRadius,dotRadius) {
-    document.getElementById('dotCont').insertAdjacentHTML('beforeend',`<div class="dot"></div>`); // creating dot
+    // creates dot
+    document.getElementById('dotCont').insertAdjacentHTML('beforeend',`<div class="dot"></div>`);
     var fixedRan = randInt(0,360);
     
     // applying style to dot (position,color,size)
@@ -34,8 +39,8 @@ function runEngine() {
       transform:translate(${coords});
     `;
 
-    var dotDelStatus = false;
-    document.querySelectorAll('div.dot')[dotIt].setAttribute('onmouseover','if (dotDelStatus == true) {this.outerHTML = ""}');
+    // hides dot if d key is held and cursor hovered over targeted dot
+    document.querySelectorAll('div.dot')[dotIt].setAttribute('onmouseover','if (dotDelStatus == true) {this.style = "display:none"}');
     
     // storing postion relative to page border
     var x = document.querySelectorAll('div.dot')[dotIt].getBoundingClientRect().left;
@@ -47,13 +52,15 @@ function runEngine() {
     dotIt++;
   }
   
-  var pause = false;
-  
-  // does stuff when key is pressed
-  document.onkeypress = event => {
+  // responsible for d key behavior
+  document.onkeydown = event => {
     if (event.key == "d") {dotDelStatus = true}
-    else {dotDelStatus = false}
-
+  }
+  document.onkeyup = event => {
+    if (event.key == "d") {dotDelStatus = false}
+  }  
+  
+  document.onkeypress = event => {
     // r : restarts engine with the same parameters
     if (event.key == "r") {
       pause = true;
@@ -71,21 +78,6 @@ function runEngine() {
     if (event.key == "p" && pause == false) {pause = true}
     else if (event.key != "p" && pause == true) {}
     else {pause = false}
-
-    // you know what ill do something else for now
-    //// q : removes last dot (not complete)
-    //if (event.key == "q" && dotIt-1 != 0) {
-    //  console.log(document.querySelectorAll('div.dot').length);
-    //  console.log(dotIt);
-
-    //  var lastIndex = dotIt-1;
-    //  document.querySelectorAll('div.dot')[lastIndex].outerHTML = "";
-    //  
-    //  x = document.querySelectorAll('div.dot')[lastIndex-1].getBoundingClientRect().left;
-    //  y = document.querySelectorAll('div.dot')[lastIndex-1].getBoundingClientRect().top;
-
-    //  dotIt--;
-    //}
 
     // question mark notation doesn't work for some reason
   
