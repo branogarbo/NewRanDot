@@ -1,9 +1,9 @@
 var userPrompt = `
-  Keyboard features:
+  Features:
     p : pauses/unpauses dot engine
     r : restarts engine with the same parameters
     c : restarts engine, allows users to change parameters
-    q : removes last dot
+    double click dot to remove it
 
   addDot(dot quantity, time between dots, dot field radius, dot radius)
 `;
@@ -33,7 +33,10 @@ function runEngine() {
       height:${dotRadius*2}px;
       transform:translate(${coords});
     `;
-      
+
+    var dotDelStatus = false;
+    document.querySelectorAll('div.dot')[dotIt].setAttribute('onmouseover','if (dotDelStatus == true) {this.outerHTML = ""}');
+    
     // storing postion relative to page border
     var x = document.querySelectorAll('div.dot')[dotIt].getBoundingClientRect().left;
     var y = document.querySelectorAll('div.dot')[dotIt].getBoundingClientRect().top;
@@ -44,10 +47,13 @@ function runEngine() {
     dotIt++;
   }
   
-  // does stuff when key is pressed
   var pause = false;
-
+  
+  // does stuff when key is pressed
   document.onkeypress = event => {
+    if (event.key == "d") {dotDelStatus = true}
+    else {dotDelStatus = false}
+
     // r : restarts engine with the same parameters
     if (event.key == "r") {
       pause = true;
@@ -66,17 +72,20 @@ function runEngine() {
     else if (event.key != "p" && pause == true) {}
     else {pause = false}
 
-    // q : removes last dot (not complete)
-    if (event.key == "q" && document.querySelectorAll('div.dot').length != 0) {
-      var lastPos = document.querySelectorAll('div.dot').length-1;
-      x = document.querySelectorAll('div.dot')[lastPos-1].getBoundingClientRect().left;
-      y = document.querySelectorAll('div.dot')[lastPos-1].getBoundingClientRect().top;
+    // you know what ill do something else for now
+    //// q : removes last dot (not complete)
+    //if (event.key == "q" && dotIt-1 != 0) {
+    //  console.log(document.querySelectorAll('div.dot').length);
+    //  console.log(dotIt);
 
-      if (dotIt > 0) {
-        document.querySelectorAll('div.dot')[lastPos].outerHTML = "";
-        dotIt--;
-      }
-    }
+    //  var lastIndex = dotIt-1;
+    //  document.querySelectorAll('div.dot')[lastIndex].outerHTML = "";
+    //  
+    //  x = document.querySelectorAll('div.dot')[lastIndex-1].getBoundingClientRect().left;
+    //  y = document.querySelectorAll('div.dot')[lastIndex-1].getBoundingClientRect().top;
+
+    //  dotIt--;
+    //}
 
     // question mark notation doesn't work for some reason
   
