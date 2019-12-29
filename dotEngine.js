@@ -94,5 +94,3 @@ function runEngine() {
   // runs users input as code
   eval(userInput);
 }
-
-// test
