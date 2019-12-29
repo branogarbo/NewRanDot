@@ -78,24 +78,18 @@ function runEngine() {
     if (event.key == "p" && pause == false) {pause = true}
     else if (event.key != "p" && pause == true) {}
     else {pause = false}
-
-    // question mark notation doesn't work for some reason
-  
-    //event.key == "p" && pause == false ? pause = true :
-    //event.key =! "p" && pause == true ? ()=>{} :
-    //pause = false;
   };
 
-  // adds styled dot in intervals, takes evaluatable parameters
+  // adds styled dot in intervals, takes evaluable parameters
   function addDot(dotMax,interval,fieldRadius,dotRadius) {
     var dotR = eval(dotRadius);
     var fieldR = eval(fieldRadius);
     var ntrvl = eval(interval);
     var dotM = eval(dotMax);
 
-    pause == false ? createDot(fieldR,dotR) : ()=>{};
-    dotIt < dotM ? setTimeout(addDot,ntrvl,dotMax,interval,fieldRadius,dotRadius) : ()=>{};
-  }  
+    if (pause == false) {createDot(fieldR,dotR)}
+    if (dotIt < dotM) {setTimeout(addDot,ntrvl,dotMax,interval,fieldRadius,dotRadius)}
+  }
 
   // runs users input as code
   eval(userInput);
