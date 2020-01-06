@@ -10,7 +10,7 @@ var userPrompt = `
 
 // initializing values
 var randInt = (lower,upper) => {return Math.floor(Math.random()*(upper-lower)+lower)};
-var userInput = window.prompt(userPrompt,'addDot(Infinity,50,100,50)');
+var userInput = window.prompt(userPrompt,`addDot(Infinity,50,'100*Math.random()',50)`);
 var dotDelStatus = false;
 
 runEngine();
@@ -25,6 +25,8 @@ function runEngine() {
   var coords = "calc(50vw - 50%), calc(50vh - 50%)";
   
   function createDot(fieldRadius,dotRadius) {
+    var bruhSound = new Audio('bruh-sound-effect.mp3');
+    bruhSound.play(); // interact with page first
     // creates dot
     document.getElementById('dotCont').insertAdjacentHTML('beforeend',`<div class="dot"></div>`);
     var fixedRan = randInt(0,360);
@@ -47,7 +49,7 @@ function runEngine() {
     var y = document.querySelectorAll('div.dot')[dotIt].getBoundingClientRect().top;
     
     // adding vector to dots position to get position of next dot
-    coords = `${x+Math.random()*fieldRadius*Math.cos(fixedRan*Math.PI/180)}px, ${y+Math.random()*fieldRadius*Math.sin(fixedRan*Math.PI/180)}px`;
+    coords = `${x+fieldRadius*Math.cos(fixedRan*Math.PI/180)}px, ${y+fieldRadius*Math.sin(fixedRan*Math.PI/180)}px`;
     
     dotIt++;
   }
