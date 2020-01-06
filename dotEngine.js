@@ -25,8 +25,10 @@ function runEngine() {
   var coords = "calc(50vw - 50%), calc(50vh - 50%)";
   
   function createDot(fieldRadius,dotRadius) {
+    // Plays audio when dot is created
     var bruhSound = new Audio('bruh-sound-effect.mp3');
     bruhSound.play(); // interact with page first
+
     // creates dot
     document.getElementById('dotCont').insertAdjacentHTML('beforeend',`<div class="dot"></div>`);
     var fixedRan = randInt(0,360);
