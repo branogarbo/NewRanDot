@@ -65,7 +65,7 @@ function runEngine() {
   //}  
   
   // alternate dot delete idea
-  document.onkeypress = event => if (event.key == "d") {dotDelStatus = =true};
+  document.onkeypress = event => if (event.key == "d") {dotDelStatus == true};
   
   document.onkeypress = event => {
     // r : restarts engine with the same parameters
