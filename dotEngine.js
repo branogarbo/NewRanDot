@@ -57,12 +57,8 @@ function runEngine() {
   }
   
   // responsible for d key behavior
-  document.onkeydown = event => {
-    if (event.key == "d") {dotDelStatus = true}
-  }
-  document.onkeyup = event => {
-    if (event.key == "d") {dotDelStatus = false}
-  }
+  document.onkeydown = event => if (event.key == "d") {dotDelStatus = true}
+  document.onkeyup = event => if (event.key == "d") {dotDelStatus = false}
   
   document.onkeypress = event => {
     // r : restarts engine with the same parameters
