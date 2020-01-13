@@ -57,16 +57,11 @@ function runEngine() {
   }
   
   // responsible for d key behavior
-  //document.onkeydown = event => {
-  //  if (event.key == "d") {dotDelStatus = true}
-  //}
-  //document.onkeyup = event => {
-  //  if (event.key == "d") {dotDelStatus = false}
-  //}  
-  
-  // alternate dot delete idea
-  document.onkeypress = event => {
-    if (event.key == "d") {dotDelStatus == true}
+  document.onkeydown = event => {
+    if (event.key == "d") {dotDelStatus = true}
+  }
+  document.onkeyup = event => {
+    if (event.key == "d") {dotDelStatus = false}
   }
   
   document.onkeypress = event => {
